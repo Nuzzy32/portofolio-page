@@ -102,12 +102,8 @@ export default function useAnimations() {
     })
 
     // testimonials
-    gsap.from('.testi__img-container', {
-      yPercent: 50,
-      scrollTrigger: { trigger: '.testi', start: 'top bottom', scrub: 1.9 },
-    })
-    gsap.from('.testi__content', {
-      yPercent: 80,
+    gsap.from('.testi__slider', {
+      yPercent: 60,
       scrollTrigger: { trigger: '.testi', start: 'top bottom', scrub: 1.9 },
     })
 
