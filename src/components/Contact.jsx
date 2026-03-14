@@ -1,5 +1,4 @@
 import { useState, useRef } from 'react'
-import emailjs from '@emailjs/browser'
 
 export default function Contact() {
   const formRef = useRef(null)
@@ -7,25 +6,35 @@ export default function Contact() {
   const [sent, setSent] = useState(false)
   const [error, setError] = useState(false)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setSending(true)
     setError(false)
 
-    emailjs.sendForm(
-      'service_portfolio',
-      'template_portfolio',
-      formRef.current,
-      'YOUR_PUBLIC_KEY'
-    ).then(() => {
+    const form = formRef.current
+    const data = {
+      first_name: form.first_name.value,
+      last_name: form.last_name.value,
+      email: form.user_email.value,
+      subject: form.subject.value,
+      message: form.message.value,
+    }
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+      if (!res.ok) throw new Error()
       setSending(false)
       setSent(true)
-      formRef.current.reset()
+      form.reset()
       setTimeout(() => setSent(false), 4000)
-    }).catch(() => {
+    } catch {
       setSending(false)
       setError(true)
-    })
+    }
   }
 
   return (
