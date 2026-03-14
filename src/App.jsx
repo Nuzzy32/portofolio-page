@@ -8,6 +8,7 @@ import Testimonials from './components/Testimonials'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import MusicPlayer from './components/MusicPlayer'
+import { Analytics } from '@vercel/analytics/react'
 import useAnimations from './hooks/useAnimations'
 import './normalize.css'
 import './style.css'
@@ -33,6 +34,7 @@ export default function App() {
       </main>
       <Footer />
     </div>
+      <Analytics />
     </>
   )
 }
