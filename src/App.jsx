@@ -9,6 +9,7 @@ import Contact from './components/Contact'
 import Footer from './components/Footer'
 import MusicPlayer from './components/MusicPlayer'
 import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 import useAnimations from './hooks/useAnimations'
 import './normalize.css'
 import './style.css'
@@ -35,6 +36,7 @@ export default function App() {
       <Footer />
     </div>
       <Analytics />
+      <SpeedInsights />
     </>
   )
 }
