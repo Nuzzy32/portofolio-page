@@ -129,7 +129,8 @@ export default function Work() {
             onClick={() => setSelected(p)}
           >
             <div className="work__card-img">
-              <img src={p.img} alt={p.title} />
+              <img src={p.img} alt={p.title} style={p.title === 'Coming Soon' ? { filter: 'blur(6px)' } : undefined} />
+              {p.title === 'Coming Soon' && <span className="work__card-coming">Coming Soon</span>}
             </div>
             <div className="work__card-info">
               <h3 className="work__card-title">{p.title}</h3>
