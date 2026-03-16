@@ -70,10 +70,10 @@ export default function Services() {
                   </svg>
                 </span>
                 <h3 className="pricing__name">Regular</h3>
-                <p className="pricing__desc">Cocok untuk kebutuhan desain personal atau proyek kecil dengan hasil profesional.</p>
+                <p className="pricing__desc"></p>
               </div>
               <div className="pricing__price">
-                <span className="pricing__amount">Rp 700K</span>
+                <span className="pricing__amount">Rp 0</span>
                 <span className="pricing__period">/project</span>
               </div>
               <ul className="pricing__features">
@@ -105,10 +105,11 @@ export default function Services() {
                   </svg>
                 </span>
                 <h3 className="pricing__name">Professional</h3>
-                <p className="pricing__desc">Solusi lengkap untuk bisnis dan proyek besar yang membutuhkan hasil maksimal.</p>
+                <p className="pricing__desc"></p>
               </div>
               <div className="pricing__price">
-                <span className="pricing__amount pricing__amount--custom">Let's Talk</span>
+                <span className="pricing__amount">Rp 0</span>
+                <span className="pricing__period">/project</span>
               </div>
               <ul className="pricing__features">
                 {proFeatures.map((f) => (

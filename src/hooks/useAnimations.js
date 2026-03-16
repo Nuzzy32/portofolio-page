@@ -108,17 +108,11 @@ export default function useAnimations() {
     })
 
     // portfolio
-    gsap.from('.work__item, .work__item-num', {
-      y: (i, el) => 1 - parseFloat(el.getAttribute('data-speed')),
-      scrollTrigger: { trigger: '.work', start: 'top bottom', scrub: 1.9 },
-    })
-    gsap.from('.work__item-img img', {
-      scale: 1.6,
-      scrollTrigger: {
-        trigger: '.work__wrapp',
-        start: 'top bottom',
-        scrub: 1.9,
-      },
+    gsap.from('.work__card', {
+      y: 80,
+      opacity: 0,
+      stagger: 0.15,
+      scrollTrigger: { trigger: '.work__grid', start: 'top 85%', end: 'bottom 60%', scrub: 1.2 },
     })
 
     // services

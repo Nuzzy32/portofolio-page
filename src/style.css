@@ -497,40 +497,199 @@ section {
 	padding-top: 150px;
 }
 
-.work__wrapp {
+.work__subtitle {
+	color: #aaa;
+	font-size: 16px;
+	margin-top: 12px;
+	text-align: center;
+}
+
+.work__grid {
+	display: grid;
+	grid-template-columns: repeat(3, 320px);
+	gap: 1.5rem;
+	justify-content: center;
+	max-width: 1100px;
+	margin: 60px auto 0;
+	padding: 0 20px;
+}
+
+.work__card {
 	display: flex;
-	flex-wrap: wrap;
-	row-gap: 120px;
-	justify-content: space-between;
-	padding: 0 120px;
-}
-
-.work__item {
-	position: relative;
-	width: calc(50% - 60px);
-	height: 100vh;
-}
-
-.work__item-num {
-	position: absolute;
-	display: inline-block;
-	font-size: 70px;
-	color: var(--pr-color);
-	mix-blend-mode: difference;
-	z-index: 2;
-}
-
-.work__item-img {
-	width: 100%;
-	height: 100%;
+	flex-direction: column;
+	border-radius: 20px;
+	border: 1px solid #333;
+	background: var(--card-gradient);
 	overflow: hidden;
+	transition: border-color 0.3s ease, transform 0.3s ease;
+	text-decoration: none;
+	color: inherit;
+	position: relative;
+	cursor: pointer;
 }
 
-.work__item-img img {
-	display: block;
+.work__card::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+		rgba(255, 255, 255, 0.15),
+		transparent 70%);
+	opacity: 0;
+	transition: opacity 0.5s ease;
+	z-index: 2;
+	pointer-events: none;
+	border-radius: 20px;
+}
+
+.work__card:hover::before {
+	opacity: 1;
+}
+
+.work__card:hover {
+	border-color: var(--card-border);
+	transform: translateY(-4px);
+}
+
+.work__card-img {
+	padding: 10px;
+	height: 200px;
+	overflow: hidden;
+	border-radius: 10px;
+}
+
+.work__card-img img {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
+	border-radius: 10px;
+}
+
+.work__card-info {
+	padding: 0 16px 16px;
+}
+
+.work__card-title {
+	font-size: 18px;
+	font-weight: 700;
+	color: #fff;
+	margin-bottom: 6px;
+}
+
+.work__card-desc {
+	font-size: 13px;
+	line-height: 1.5;
+	color: #aaa;
+}
+
+/* project modal */
+.modal__overlay {
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.75);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 999;
+	padding: 20px;
+	backdrop-filter: blur(4px);
+}
+
+.modal__content {
+	background: #111;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 20px;
+	width: 100%;
+	max-width: 480px;
+	overflow: hidden;
+	box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+}
+
+.modal--in {
+	animation: modalIn 0.3s ease-out forwards;
+}
+
+.modal--out {
+	animation: modalOut 0.3s ease-in forwards;
+}
+
+@keyframes modalIn {
+	from { transform: scale(0.95); opacity: 0; }
+	to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes modalOut {
+	from { transform: scale(1); opacity: 1; }
+	to { transform: scale(0.95); opacity: 0; }
+}
+
+.modal__img {
+	width: 100%;
+	height: 220px;
+	object-fit: cover;
+}
+
+.modal__body {
+	padding: 24px;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.modal__header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+
+.modal__title {
+	font-size: 24px;
+	font-weight: 700;
+	color: #fff;
+}
+
+.modal__close {
+	background: none;
+	border: none;
+	color: #666;
+	cursor: pointer;
+	padding: 8px;
+	border-radius: 50%;
+	transition: background 0.2s, color 0.2s;
+	display: flex;
+	align-items: center;
+}
+
+.modal__close:hover {
+	background: rgba(255, 255, 255, 0.1);
+	color: #fff;
+}
+
+.modal__desc {
+	font-size: 15px;
+	line-height: 1.7;
+	color: #aaa;
+}
+
+.modal__btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	background: #fff;
+	color: #000;
+	font-size: 15px;
+	font-weight: 600;
+	padding: 14px 24px;
+	border-radius: 50px;
+	text-decoration: none;
+	transition: background 0.2s, transform 0.2s;
+	margin-top: 8px;
+}
+
+.modal__btn:hover {
+	background: #ddd;
+	transform: scale(1.02);
 }
 
 /* serv ********/
@@ -1126,19 +1285,10 @@ section {
 		padding-top: 80px;
 	}
 
-	.work__wrapp {
-		flex-direction: column;
-		padding: 0;
-		row-gap: 40px;
-	}
-
-	.work__item {
-		width: 100%;
-		height: 50vh;
-	}
-
-	.work__item-num {
-		font-size: 40px;
+	.work__grid {
+		grid-template-columns: 1fr;
+		max-width: 350px;
+		margin-top: 30px;
 	}
 
 	/* testimonials */

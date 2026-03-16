@@ -44,7 +44,7 @@ export default function Testimonials() {
         <p className="testi__subtitle">What clients say about working with me</p>
       </div>
 
-      <div className="testi__slider">
+      <div className="testi__slider" style={{ filter: 'blur(8px)', userSelect: 'none', pointerEvents: 'none' }}>
         <div className="testi__track">
           {duplicated.map((t, i) => (
             <div key={i} className="testi__card">

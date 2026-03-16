@@ -51,6 +51,41 @@ const skills = [
     level: 70,
     description: 'Comfortable with database design, complex queries, joins, and optimization. Used in multiple full-stack projects.',
   },
+  {
+    name: 'Firebase',
+    category: 'Framework',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg',
+    level: 75,
+    description: 'Experienced with Firebase services including Firestore, Authentication, Cloud Functions, and Hosting for rapid app development.',
+  },
+  {
+    name: 'Vite',
+    category: 'Framework',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vitejs/vitejs-original.svg',
+    level: 85,
+    description: 'My go-to build tool for modern web projects. Fast HMR, optimized builds, and excellent plugin ecosystem for React development.',
+  },
+  {
+    name: 'GitHub',
+    category: 'Repository',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg',
+    level: 80,
+    description: 'Proficient in version control with Git and GitHub. Experienced with branches, pull requests, CI/CD workflows, and collaboration.',
+  },
+  {
+    name: 'Java',
+    category: 'Language',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg',
+    level: 75,
+    description: 'Experienced in object-oriented programming with Java. Used for building desktop applications, backend services, and academic projects.',
+  },
+  {
+    name: 'Python',
+    category: 'Language',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
+    level: 80,
+    description: 'Proficient in Python for scripting, data analysis, and backend development. Comfortable with libraries like Flask, NumPy, and Pandas.',
+  },
 ]
 
 function SkillCard({ skill }) {
