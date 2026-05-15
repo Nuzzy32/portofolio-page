@@ -45,7 +45,7 @@ export default function MarqueeSection() {
         <div className="overflow-hidden w-full">
           <div
             ref={row1Ref}
-            className="flex gap-3"
+            className="flex gap-3 blur-sm"
             style={{
               willChange: 'transform',
               transform: 'translateX(-200px)',
@@ -60,7 +60,7 @@ export default function MarqueeSection() {
                 <img
                   src={src}
                   alt=""
-                  className="w-full h-full object-cover blur-md"
+                  className="w-full h-full object-cover"
                   loading="lazy"
                 />
               </div>
@@ -71,7 +71,7 @@ export default function MarqueeSection() {
         <div className="overflow-hidden w-full">
           <div
             ref={row2Ref}
-            className="flex gap-3"
+            className="flex gap-3 blur-sm"
             style={{
               willChange: 'transform',
               transform: 'translateX(200px)',
@@ -86,7 +86,7 @@ export default function MarqueeSection() {
                 <img
                   src={src}
                   alt=""
-                  className="w-full h-full object-cover blur-md"
+                  className="w-full h-full object-cover"
                   loading="lazy"
                 />
               </div>
