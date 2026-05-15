@@ -55,13 +55,13 @@ function ProjectCard({
             src={project.images[0]}
             alt={`${project.name} preview 1`}
             loading="lazy"
-            className="project-preview-small w-full rounded-[32px] object-cover blur-md sm:rounded-[42px] md:rounded-[52px]"
+            className="project-preview-small w-full rounded-[32px] object-cover sm:rounded-[42px] md:rounded-[52px]"
           />
           <img
             src={project.images[1]}
             alt={`${project.name} preview 2`}
             loading="lazy"
-            className="project-preview-stack w-full rounded-[32px] object-cover blur-md sm:rounded-[42px] md:rounded-[52px]"
+            className="project-preview-stack w-full rounded-[32px] object-cover sm:rounded-[42px] md:rounded-[52px]"
           />
         </div>
         <div className="md:w-[60%]">
@@ -69,7 +69,7 @@ function ProjectCard({
             src={project.images[2]}
             alt={`${project.name} main preview`}
             loading="lazy"
-            className="project-preview-main w-full rounded-[32px] object-cover blur-md sm:rounded-[42px] md:rounded-[52px]"
+            className="project-preview-main w-full rounded-[32px] object-cover sm:rounded-[42px] md:rounded-[52px]"
           />
         </div>
       </div>

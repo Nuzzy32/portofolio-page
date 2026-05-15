@@ -60,7 +60,7 @@ export default function MarqueeSection() {
                 <img
                   src={src}
                   alt=""
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover blur-md"
                   loading="lazy"
                 />
               </div>
@@ -86,7 +86,7 @@ export default function MarqueeSection() {
                 <img
                   src={src}
                   alt=""
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover blur-md"
                   loading="lazy"
                 />
               </div>
