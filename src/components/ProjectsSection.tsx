@@ -1,20 +1,120 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import type { CSSProperties } from 'react';
 import FadeIn from './FadeIn';
 import LiveProjectButton from './LiveProjectButton';
 import { projects } from '../data';
+import type { Project } from '../data';
 
-type Project = (typeof projects)[number];
+const roundedLg = 'rounded-[32px] sm:rounded-[42px] md:rounded-[52px]';
+const roundedPhone = 'rounded-[24px] sm:rounded-[30px] md:rounded-[36px]';
 
-function ProjectCard({
-  project,
-  index,
-}: {
-  project: Project;
-  index: number;
-}) {
-  const containerRef = useRef<HTMLElement>(null);
+function ProjectVideo({ src, poster, label }: { src: string; poster: string; label: string }) {
+  const ref = useRef<HTMLVideoElement>(null);
+  const reduceMotion = useReducedMotion();
+
+  // Autoplay muted while in view; only one film plays at a time (cards stack on top of each other).
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || reduceMotion) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          document.querySelectorAll<HTMLVideoElement>('video[data-film]').forEach((v) => v !== el && v.pause());
+          el.play().catch(() => {});
+        } else {
+          el.pause();
+        }
+      },
+      { threshold: 0.6 },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [reduceMotion]);
+
+  return (
+    <video
+      ref={ref}
+      data-film
+      src={src}
+      poster={poster}
+      aria-label={label}
+      muted
+      loop
+      playsInline
+      controls
+      preload="metadata"
+      className={`project-preview-main w-full bg-black object-cover ${roundedLg}`}
+    />
+  );
+}
+
+function ProjectMedia({ project }: { project: Project }) {
+  const { main, stills, stillsKind, name } = project;
+
+  if (!main) {
+    return (
+      <div className="grid grid-cols-2 gap-3 md:flex md:justify-center md:gap-6">
+        {stills.map((src, i) => (
+          <img
+            key={src}
+            src={src}
+            alt={`${name} screen ${i + 1}`}
+            loading="lazy"
+            className={`w-full object-cover md:h-[clamp(14rem,46dvh,34rem)] md:w-auto ${roundedPhone}`}
+          />
+        ))}
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col gap-4 md:flex-row md:gap-6">
+      {stillsKind === 'phone' ? (
+        <div className="flex gap-4 md:w-[40%] md:gap-6">
+          {stills.map((src, i) => (
+            <img
+              key={src}
+              src={src}
+              alt={`${name} screen ${i + 1}`}
+              loading="lazy"
+              className={`project-preview-main min-w-0 flex-1 object-cover object-top ${roundedPhone}`}
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="flex flex-col gap-4 md:w-[40%] md:gap-6">
+          <img
+            src={stills[0]}
+            alt={`${name} preview 1`}
+            loading="lazy"
+            className={`project-preview-small w-full object-cover ${roundedLg}`}
+          />
+          <img
+            src={stills[1]}
+            alt={`${name} preview 2`}
+            loading="lazy"
+            className={`project-preview-stack w-full object-cover ${roundedLg}`}
+          />
+        </div>
+      )}
+      <div className="md:w-[60%]">
+        {main.type === 'video' ? (
+          <ProjectVideo src={main.src} poster={main.poster} label={`${name} motion graphic`} />
+        ) : (
+          <img
+            src={main.src}
+            alt={`${name} main preview`}
+            loading="lazy"
+            className={`project-preview-main w-full object-cover object-top ${roundedLg}`}
+          />
+        )}
+      </div>
+    </div>
+  );
+}
+
+function ProjectCard({ project, index }: { project: Project; index: number }) {
   const reduceMotion = useReducedMotion();
   const style = {
     '--card-offset': `${index * 22}px`,
@@ -26,7 +126,6 @@ function ProjectCard({
 
   return (
     <motion.article
-      ref={containerRef}
       style={style}
       initial={reduceMotion ? false : { y: 90, opacity: 0.86, scale: 0.985 }}
       whileInView={reduceMotion ? undefined : { y: 0, opacity: 1, scale: 1 }}
@@ -44,35 +143,27 @@ function ProjectCard({
             <h3 className="mt-4 text-[clamp(1.8rem,4vw,3.9rem)] font-light leading-none tracking-wide">
               {project.name}
             </h3>
+            <p className="mt-3 max-w-2xl text-sm leading-relaxed opacity-70">
+              {project.description}
+            </p>
           </div>
         </div>
-        <LiveProjectButton />
+        <div className="flex flex-col gap-4 md:items-end">
+          <ul className="flex flex-wrap gap-2 md:justify-end">
+            {project.stack.map((tech) => (
+              <li
+                key={tech}
+                className="rounded-full border border-[#D7E2EA]/40 px-3 py-1 text-xs uppercase tracking-widest opacity-80"
+              >
+                {tech}
+              </li>
+            ))}
+          </ul>
+          {project.href && <LiveProjectButton href={project.href} label="GitHub" />}
+        </div>
       </div>
 
-      <div className="flex flex-col gap-4 md:flex-row md:gap-6">
-        <div className="flex flex-col gap-4 md:w-[40%] md:gap-6">
-          <img
-            src={project.images[0]}
-            alt={`${project.name} preview 1`}
-            loading="lazy"
-            className="project-preview-small w-full rounded-[32px] object-cover blur-md sm:rounded-[42px] md:rounded-[52px]"
-          />
-          <img
-            src={project.images[1]}
-            alt={`${project.name} preview 2`}
-            loading="lazy"
-            className="project-preview-stack w-full rounded-[32px] object-cover blur-md sm:rounded-[42px] md:rounded-[52px]"
-          />
-        </div>
-        <div className="md:w-[60%]">
-          <img
-            src={project.images[2]}
-            alt={`${project.name} main preview`}
-            loading="lazy"
-            className="project-preview-main w-full rounded-[32px] object-cover blur-md sm:rounded-[42px] md:rounded-[52px]"
-          />
-        </div>
-      </div>
+      <ProjectMedia project={project} />
     </motion.article>
   );
 }

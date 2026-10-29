@@ -191,28 +191,81 @@ export const services = [
   },
 ];
 
-const projectImages = [
-  [
-    'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055344_5eff02e0-87a5-41ce-b64f-eb08da8f33db.png&w=1280&q=85',
-    'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055431_11d841fd-8b41-46a5-82e4-b04f2407a7d8.png&w=1280&q=85',
-    'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055451_e317bf2d-28d4-48cc-86b0-6f72f25b6327.png&w=1280&q=85',
-  ],
-  [
-    'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055654_911201c5-36d9-4bc6-bac7-331adfce159f.png&w=1280&q=85',
-    'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055723_5ceda0b8-d9c2-4665-b2e3-83ba19ba76d1.png&w=1280&q=85',
-    'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055753_adc5dcbd-a8e6-49c0-b43a-9b030d835cea.png&w=1280&q=85',
-  ],
-  [
-    'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055759_963cfb0b-4bd1-4b0f-9d0a-09bd6cf95b2f.png&w=1280&q=85',
-    'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_060108_438f781a-9846-4dcc-89ab-c4e6cb830f5b.png&w=1280&q=85',
-    'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055818_9d062121-ad7e-46b9-999a-1a6a692ef1ee.png&w=1280&q=85',
-  ],
-];
+type Media =
+  | { type: 'video'; src: string; poster: string }
+  | { type: 'image'; src: string };
 
-export const projects = [
-  { number: '01', name: 'Modern Web Experience', category: 'React / Vite', images: projectImages[0] },
-  { number: '02', name: 'Firebase Product Flow', category: 'Cloud', images: projectImages[1] },
-  { number: '03', name: 'AI / ML Prototype', category: 'Python', images: projectImages[2] },
-  { number: '04', name: 'Business Dashboard', category: 'MySQL', images: projectImages[0] },
-  { number: '05', name: 'Java Utility App', category: 'Java', images: projectImages[1] },
+export type Project = {
+  number: string;
+  name: string;
+  category: string;
+  description: string;
+  stack: string[];
+  href?: string;
+  main?: Media;
+  stills: string[];
+  stillsKind: 'wide' | 'phone';
+};
+
+const shots = (slug: string, files: string[]) => files.map((file) => `/projects/${slug}/${file}`);
+
+export const projects: Project[] = [
+  {
+    number: '01',
+    name: 'Grouply',
+    category: 'iOS & Android App',
+    description:
+      'Coordination app for student group projects: tasks, versioned submissions, peer review, and realtime group chat.',
+    stack: ['SwiftUI', 'Flutter', 'Supabase'],
+    href: 'https://github.com/Nuzzy32/Grouply',
+    stills: shots('grouply', ['shot-1.jpg', 'shot-2.jpg', 'shot-3.jpg', 'shot-4.jpg']),
+    stillsKind: 'phone',
+  },
+  {
+    number: '02',
+    name: 'Rivora',
+    category: 'Mobile & Web App',
+    description:
+      'Flood status per location for residents across Indonesia: verified citizen reports, BMKG forecasts, nearby facilities, and emergency contacts.',
+    stack: ['Flutter', 'React', 'Supabase', 'PostGIS'],
+    href: 'https://github.com/Nuzzy32/Rivora',
+    main: { type: 'video', src: '/projects/rivora/film.mp4', poster: '/projects/rivora/poster.jpg' },
+    stills: shots('rivora', ['peta.jpg', 'prakiraan.jpg']),
+    stillsKind: 'phone',
+  },
+  {
+    number: '03',
+    name: 'Riskala Lite',
+    category: 'Mobile App',
+    description:
+      'Workplace mental-health companion: daily mood check-ins, transparent stress assessment, complaint reports, and an HR dashboard.',
+    stack: ['Flutter', 'Laravel API', 'MySQL'],
+    main: { type: 'video', src: '/projects/riskala/film.mp4', poster: '/projects/riskala/shot-1.jpg' },
+    stills: shots('riskala', ['shot-2.jpg', 'shot-3.jpg']),
+    stillsKind: 'wide',
+  },
+  {
+    number: '04',
+    name: 'agentdeck',
+    category: 'Desktop App',
+    description:
+      'Terminal that runs Claude Code, Codex, and shell side by side. Agents hand tasks to each other through a local MCP bridge while you stay in control.',
+    stack: ['Tauri', 'Rust', 'React'],
+    href: 'https://github.com/Nuzzy32/agentdeck',
+    main: { type: 'image', src: '/projects/agentdeck/shot-1.jpg' },
+    stills: shots('agentdeck', ['shot-2.jpg', 'shot-3.jpg']),
+    stillsKind: 'wide',
+  },
+  {
+    number: '05',
+    name: 'SIGAP',
+    category: 'AI Voice Agent',
+    description:
+      'AI voice agent for the HaloBPOM service: instant, officially sourced answers for the public, with a queue that holds only the cases that need an officer.',
+    stack: ['Astro', 'TypeScript', 'Supabase'],
+    href: 'https://github.com/AgilePemdigi-2026/SigapBPOM',
+    main: { type: 'video', src: '/projects/sigap/film.mp4', poster: '/projects/sigap/shot-1.jpg' },
+    stills: shots('sigap', ['shot-2.jpg', 'shot-3.jpg']),
+    stillsKind: 'wide',
+  },
 ];
