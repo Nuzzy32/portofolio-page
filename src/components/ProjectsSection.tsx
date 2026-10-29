@@ -133,34 +133,34 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       transition={{ type: 'spring', duration: 0.7, bounce: 0 }}
       className="project-sticky-card mb-[22vh] overflow-hidden rounded-[40px] border-[3px] border-[#D7E2EA] bg-[#0C0C0C] p-4 shadow-[0_40px_110px_rgba(0,0,0,0.62)] last:mb-0 sm:rounded-[50px] sm:p-6 md:sticky md:mb-[24vh] md:rounded-[60px] md:p-8 lg:p-10"
     >
-      <div className="mb-6 flex flex-col gap-5 text-[#D7E2EA] md:mb-8 md:flex-row md:items-center md:justify-between lg:mb-9">
-        <div className="grid gap-4 md:grid-cols-[minmax(130px,0.28fr)_1fr] md:items-end lg:grid-cols-[minmax(180px,0.3fr)_1fr]">
-          <p className="hero-heading text-[clamp(4rem,10vw,150px)] font-black leading-none">
-            {project.number}
+      <div className="mb-6 grid gap-5 text-[#D7E2EA] md:mb-8 md:grid-cols-[auto_minmax(0,1fr)_auto] md:items-end md:gap-10 lg:mb-10">
+        <p className="hero-heading text-[clamp(3.75rem,8.5vw,128px)] font-black leading-[0.8]">{project.number}</p>
+        <div>
+          <p className="text-xs font-light uppercase tracking-[0.28em] text-[#D7E2EA]/60 md:text-sm">
+            {project.category}
           </p>
-          <div>
-            <p className="text-sm font-black uppercase tracking-[0.22em] opacity-90 md:text-xl">{project.category}</p>
-            <h3 className="mt-4 text-[clamp(1.8rem,4vw,3.9rem)] font-light leading-none tracking-wide">
-              {project.name}
-            </h3>
-            <p className="mt-3 max-w-2xl text-sm leading-relaxed opacity-70">
-              {project.description}
-            </p>
-          </div>
-        </div>
-        <div className="flex flex-col gap-4 md:items-end">
-          <ul className="flex flex-wrap gap-2 md:justify-end">
+          <h3 className="mt-2 text-[clamp(2rem,4.2vw,4rem)] font-light leading-none tracking-tight">
+            {project.name}
+          </h3>
+          <p className="mt-4 max-w-[58ch] text-[clamp(0.9rem,1.15vw,1.05rem)] font-light leading-relaxed text-[#D7E2EA]/60 [text-wrap:pretty]">
+            {project.description}
+          </p>
+          <ul aria-label="Tech stack" className="mt-4 flex flex-wrap gap-2">
             {project.stack.map((tech) => (
               <li
                 key={tech}
-                className="rounded-full border border-[#D7E2EA]/40 px-3 py-1 text-xs uppercase tracking-widest opacity-80"
+                className="rounded-full border border-[#D7E2EA]/20 px-3 py-1 text-[11px] font-light uppercase leading-none tracking-[0.2em] text-[#D7E2EA]/70"
               >
                 {tech}
               </li>
             ))}
           </ul>
-          {project.href && <LiveProjectButton href={project.href} label="GitHub" />}
         </div>
+        {project.href && (
+          <div className="md:self-end">
+            <LiveProjectButton href={project.href} label="GitHub" />
+          </div>
+        )}
       </div>
 
       <ProjectMedia project={project} />
