@@ -240,6 +240,7 @@ export const projects: Project[] = [
     description:
       'Workplace mental-health companion: daily mood check-ins, transparent stress assessment, complaint reports, and an HR dashboard.',
     stack: ['Flutter', 'Laravel API', 'MySQL'],
+    href: 'https://github.com/Nuzzy32/RiskalaLite',
     main: { type: 'video', src: '/projects/riskala/film.mp4', poster: '/projects/riskala/shot-1.jpg' },
     stills: shots('riskala', ['shot-2.jpg', 'shot-3.jpg']),
     stillsKind: 'wide',
